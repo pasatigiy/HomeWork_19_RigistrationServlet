@@ -1,5 +1,7 @@
 package HomeWork19.Servlet;
 
+import java.util.Objects;
+
 public class User {
     String name;
     String username;
@@ -7,13 +9,16 @@ public class User {
 
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(name, user.name) && Objects.equals(username, user.username) && Objects.equals(password, user.password);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public int hashCode() {
+        return Objects.hash(name, username, password);
     }
 
     public User(String name, String username, String password) {

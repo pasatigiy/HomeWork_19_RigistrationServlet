@@ -2,18 +2,30 @@ package HomeWork19.Servlet;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class InMemoryStorage {
-    ArrayList<User> listUser = new ArrayList<>();
+  static   ArrayList<User> listUser = new ArrayList<>();
 
-    public String  addlistUser(String name, String userName, String password) {
-        User user = new User(name, userName, password);
-        if (listUser.contains(user)) {
-            return "such user already exists";
-        } else {
-            listUser.add(user);
-        }
-        return "user add";
+    public static User createUser(String name, String username, String password){
+        if ( name == null){
+            System.out.println("invalid name");
+        } else if ( username == null){
+            System.out.println("invalid username");
+        } else if (password == null){
+            System.out.println("invalid password");
+        } else return new User(name, username, password);
+        return null;
     }
+
+    public static boolean userExist(User user){
+        return listUser.contains(user);
+    }
+
+    public static void addUser(User user){
+        listUser.add(user);
+    }
+
+
 }

@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static HomeWork19.Servlet.InMemoryStorage.createUser;
+import static HomeWork19.Servlet.InMemoryStorage.userExist;
+
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
 
@@ -17,8 +20,13 @@ public class RegistrationServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        InMemoryStorage inMemoryStorage = new InMemoryStorage();
-        resp.getWriter().println(inMemoryStorage.addlistUser(name, username, password));
+        User user = createUser(name, username, password);
+
+        if (userExist(user)){
+           resp.getWriter().println("User exist");
+        } else {
+            resp.getWriter().println("User registered");
+        }
 
 
     }
